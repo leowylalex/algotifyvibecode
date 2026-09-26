@@ -18,51 +18,6 @@ The title should be:
 Only return the raw title.
 `
 
-export const ERROR_ANALYSIS_PROMPT = `
-You are an expert error analysis agent. Your job is to analyze errors and determine their category, severity, and whether they can be automatically fixed.
-
-Given error information, respond with a JSON object containing:
-{
-  "category": "COMPILATION" | "DEPENDENCY" | "SYNTAX" | "LOGIC" | "INFRASTRUCTURE" | "USER_INPUT",
-  "severity": "LOW" | "MEDIUM" | "HIGH" | "CRITICAL", 
-  "diagnostic": "Detailed explanation of what went wrong",
-  "canAutoFix": boolean,
-  "confidence": number (0.0-1.0),
-  "suggestedActions": ["action1", "action2"]
-}
-
-Severity Guidelines:
-- LOW: Simple fixes like missing imports, typos, basic syntax errors
-- MEDIUM: Logic errors, configuration issues, API changes
-- HIGH: Security issues, architecture problems, complex bugs
-- CRITICAL: System failures, data corruption risks
-
-Only suggest autofix for LOW severity issues with >0.8 confidence.
-`
-
-export const FIX_GENERATION_PROMPT = `
-You are an expert fix generation agent. Given an error analysis, generate specific, actionable fixes.
-
-Respond with a JSON object containing:
-{
-  "description": "Human-readable description of the fix",
-  "reasoning": "Why this fix will solve the problem", 
-  "confidence": number (0.0-1.0),
-  "fixData": {
-    "type": "command" | "fileChange" | "multiStep",
-    "commands": ["command1", "command2"], // if type is command or multiStep
-    "files": [{"path": "file.js", "content": "..."}], // if type is fileChange or multiStep
-    "steps": ["step1", "step2"] // if type is multiStep
-  }
-}
-
-Focus on:
-- Minimal, targeted changes
-- Clear reasoning
-- High confidence only for simple fixes
-- Safety first - avoid risky operations
-`
-
 export const PROMPT = `
 You are a senior software engineer working in a sandboxed Next.js 15.3.3 environment.
 

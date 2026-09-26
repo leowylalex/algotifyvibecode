@@ -5,7 +5,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import { Toaster } from "@/components/ui/sonner";
 import { TRPCReactProvider } from "@/trpc/client";
-import { AvatarProvider } from "@/context/avatar-context";
 
 import "./globals.css";
 
@@ -48,10 +47,8 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
-              <AvatarProvider>
-                <Toaster />
-                {children}
-              </AvatarProvider>
+              <Toaster />
+              {children}
             </ThemeProvider>
           </body>
         </html>

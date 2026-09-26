@@ -9,7 +9,6 @@ import { Fragment } from "@/generated/prisma";
 import { Button } from "@/components/ui/button";
 import { UserControl } from "@/components/user-control";
 import { FileExplorer } from "@/components/file-explorer";
-import { ApprovalsSection } from "@/components/approvals-section";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   ResizableHandle,
@@ -47,14 +46,6 @@ export const ProjectView = ({ projectId }: Props) => {
             </Suspense>
           </ErrorBoundary>
           <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
-            {/* Temporarily hidden - approvals system ready but needs integration refinement */}
-            {/* <ErrorBoundary fallback={<p>Approvals error</p>}>
-              <Suspense fallback={<p>Loading approvals...</p>}>
-                <div className="p-4 border-b bg-muted/30">
-                  <ApprovalsSection projectId={projectId} />
-                </div>
-              </Suspense>
-            </ErrorBoundary> */}
             <ErrorBoundary fallback={<p>Messages container error</p>}>
               <Suspense fallback={<p>Loading messages...</p>}>
                 <MessagesContainer
